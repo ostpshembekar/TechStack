@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechStack.Models
 {
+    // Step 1: Create the model
     public class Catalog
     {
         // POCO: Plain old C# objects (POJO: Plain old Java objects)

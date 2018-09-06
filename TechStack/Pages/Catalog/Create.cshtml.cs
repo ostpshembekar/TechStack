@@ -26,10 +26,11 @@ namespace TechStack.Pages.Catalog
         [BindProperty]
         public Models.Catalog Catalog { get; set; }
 
-        public void OnPostCreate()
+        public async Task<IActionResult> OnPostCreate()
         {
             _context.Add(Catalog);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+            return RedirectToPage();
         }
     }
 }

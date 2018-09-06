@@ -32,6 +32,7 @@ namespace TechStack
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // Step 3: Provide the configuration for the datastore
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase("MyConnection"));
 

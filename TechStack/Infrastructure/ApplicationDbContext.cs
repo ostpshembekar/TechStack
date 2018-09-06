@@ -7,6 +7,7 @@ using TechStack.Models;
 
 namespace TechStack.Infrastructure
 {
+    // Step 2: Create a context to talk to a datastore
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

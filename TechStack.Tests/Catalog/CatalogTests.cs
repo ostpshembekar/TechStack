@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Linq;
 using Xunit;
-using TechStack.Models;
 using TechStack.Pages.Catalog;
 using Microsoft.EntityFrameworkCore;
 using TechStack.Infrastructure;
+
 
 namespace TechStack.Tests.Catalog
 {
@@ -29,7 +27,7 @@ namespace TechStack.Tests.Catalog
 
             createmodel.OnPostCreate();
 
-            Assert.Equal("Microsoft", createmodel.Catalog.Vendor);
+            Assert.True(context.Catalog.Any());
         }
     }
 }
