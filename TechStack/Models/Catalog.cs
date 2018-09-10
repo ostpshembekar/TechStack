@@ -17,6 +17,7 @@ namespace TechStack.Models
 
         public string Vendor { get; set; }
 
+        [Display(Name="Latest Version")]
         public string LatestVersion { get; set; }
 
     }

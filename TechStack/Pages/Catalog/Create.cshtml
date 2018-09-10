@@ -5,7 +5,28 @@
 }
 
 <h2>Create</h2>
-<form method="post">
-    <label asp-for="Catalog.Name"></label>
-    <input asp-for="Catalog.Name" />
+<form method="post" class="form-group">
+    <div class="container">
+        <div class="col-md-4 col-sm-8">
+            <div>
+                <label asp-for="Catalog.Name" class="control-label"></label>
+                <input asp-for="Catalog.Name" class="form-control" />
+                <br />
+            </div>
+            <div>
+                <label asp-for="Catalog.Vendor" class="control-label"></label>
+                <input asp-for="Catalog.Vendor" class="form-control" />
+                <br />
+            </div>
+            <div>
+                <label asp-for="Catalog.LatestVersion" class="control-label"></label>
+                <input asp-for="Catalog.LatestVersion" class="form-control" />
+                <br />
+            </div>
+            <div>
+                <button class="btn btn-primary" asp-page-handler="Create">Submit</button>
+            </div>
+        </div>
+        
+    </div>
 </form>
