@@ -1,0 +1,60 @@
+﻿@page
+@model TechStack.Pages.Catalog.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .padding-top-8 {
+        padding-top: 8px;
+    }
+</style>
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+            <label class="control-label" asp-for="Catalog[0].Id"></label>
+        </div>
+        <div class="col-md-2">
+            <label class="control-label" asp-for="Catalog[0].Name"></label>
+        </div>
+        <div class="col-md-2">
+            <label class="control-label" asp-for="Catalog[0].Vendor"></label>
+        </div>
+        <div class="col-md-2">
+            <label class="control-label" asp-for="Catalog[0].LatestVersion"></label>
+        </div>
+        <div class="col-md-5">
+            <label class="control-label">Action</label>
+        </div>
+    </div>
+    @foreach (var item in Model.Catalog)
+    {
+    <div class="row padding-top-8">
+        <div class="col-md-1">
+            <span class="text-right">@item.Id</span>
+        </div>
+        <div class="col-md-2">
+            @item.Name
+        </div>
+        <div class="col-md-2">
+            @item.Vendor
+        </div>
+        <div class="col-md-2">
+            @item.LatestVersion
+        </div>
+        <div class="col-md-5">
+            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+        </div>
+    </div>
+    }
+</div>
+
