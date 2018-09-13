@@ -13,8 +13,10 @@ namespace TechStack.Models
         [Key]
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "Please enter the name of the catalog")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Please enter the vendor of the catalog")]
         public string Vendor { get; set; }
 
         [Display(Name="Latest Version")]
