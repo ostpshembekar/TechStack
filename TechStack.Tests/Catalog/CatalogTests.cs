@@ -31,39 +31,63 @@ namespace TechStack.Tests.Catalog
             Assert.True(context.Catalog.Any());
         }
 
-        // Adding multiple rows
+
         [Fact]
-        public async void ShouldGiveCorrectID()
+        public async void ShouldEditExistingCatalogEntry()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseInMemoryDatabase("MyConnection1");
+            optionsBuilder.UseInMemoryDatabase("MyConnection");
             var context = new ApplicationDbContext(optionsBuilder.Options);
-            var createmodel = new CreateModel(context);
-
-            //foreach (var entity in context.Catalog)
-            //    context.Catalog.Remove(entity);
-            //context.SaveChanges();
 
             var catalog = new Models.Catalog();
-            catalog.Id = 1;
+            catalog.Id = 2;
             catalog.Name = ".NET Core";
             catalog.Vendor = "Microsoft";
             catalog.LatestVersion = "2.1";
-            
+
+            var createmodel = new CreateModel(context);
             createmodel.Catalog = catalog;
+
             await createmodel.OnPostCreateAsync();
 
-            catalog = new Models.Catalog();
-            catalog.Id = 2;
-            catalog.Name = "Java";
-            catalog.Vendor = "Oracle";
-            catalog.LatestVersion = "10.0.2";
+            var newcatalog = new Models.Catalog();
+            newcatalog.Id = 2;
+            newcatalog.Name = ".NET Core";
+            newcatalog.Vendor = "Microsoft .NET";
+            newcatalog.LatestVersion = "2.1";
 
-            createmodel.Catalog = catalog;
-            await createmodel.OnPostCreateAsync();
+            var editmodel = new EditModel(context);
+            editmodel.Catalog = newcatalog;
 
-            Assert.Equal(2, context.Catalog.Max(item => item.Id));
+            await editmodel.OnPostAsync();
+
+            Assert.Equal("Microsoft .NET", context.Catalog.Find(2).Vendor);
+
         }
+
+        //// Do not provide Name
+        //[Fact]
+        //public async void ShouldThrowExceptionOnEmptyName()
+        //{
+        //    var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+        //    optionsBuilder.UseInMemoryDatabase("MyConnection");
+        //    var context = new ApplicationDbContext(optionsBuilder.Options);
+
+        //    var catalog = new Models.Catalog();
+        //    catalog.Id = 2;
+        //    catalog.Name = "";
+        //    catalog.Vendor = "Microsoft";
+        //    catalog.LatestVersion = "2.1";
+
+        //    var createmodel = new CreateModel(context);
+        //    createmodel.Catalog = catalog;
+
+        //    var result = await createmodel.OnPostCreateAsync();
+
+        //    Assert.NotNull(result);
+        //    Assert.IsType<BadRequestObjectResult>(result);
+        //}
+
 
     }
 }
