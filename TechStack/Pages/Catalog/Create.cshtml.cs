@@ -33,5 +33,6 @@ namespace TechStack.Pages.Catalog
             await _context.SaveChangesAsync();
             return RedirectToPage("Index");
         }
+
     }
 }
